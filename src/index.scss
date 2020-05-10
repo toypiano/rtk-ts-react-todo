@@ -1,0 +1,162 @@
+@mixin color($name, $color) {
+  $cl: $color;
+  $cl-light: lighten($cl, 8%);
+  $cl-lighter: lighten($cl, 16%);
+  $cl-dark: darken($cl, 8%);
+  $cl-darker: darken($cl, 16%);
+  --cl-#{$name}: #{$cl};
+  --cl-#{$name}-light: #{$cl-light};
+  --cl-#{$name}-lighter: #{$cl-lighter};
+  --cl-#{$name}-dark: #{$cl-dark};
+  --cl-#{$name}-darker: #{$cl-darker};
+}
+
+:root {
+  @include color(primary, #f51e1e);
+  @include color(secondary, #999);
+  @include color(accent, rgb(216, 156, 176));
+  --cl-light: #ffffff;
+  --cl-dark: #444;
+
+  --fw-light: 300;
+  --fw-normal: 400;
+  --fw-bold: 700;
+  --fw-black: 900;
+
+  --fz-h1: 1.5rem;
+  --fz-h2: 2.25rem;
+  --fz-body: 1rem;
+  --fz-xl: 4.4rem;
+}
+
+html {
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  font: inherit;
+}
+
+.sr-only:not(:focus):not(:active) {
+  overflow: hidden;
+  white-space: nowrap;
+  position: absolute;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  width: 1px;
+}
+
+.App {
+  header {
+    text-align: center;
+    font-size: 1.2rem;
+  }
+  width: 100vw;
+}
+
+.TodoForm {
+  width: 90%;
+  max-width: 400px;
+  margin: auto;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  &:focus-within {
+    border-color: var(--cl-primary);
+  }
+
+  .input-control {
+    display: inline-block;
+    max-width: 70%;
+    input {
+      width: 100%;
+      padding: 0.5em 0 0.5em 1em;
+    }
+  }
+
+  input,
+  button {
+    font-size: 1.2rem;
+    border: none;
+    margin: 0;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  button {
+    padding: 0.5em 1em;
+    background: var(--cl-primary);
+    color: var(--cl-light);
+    font-weight: var(--fw-bold);
+    margin-left: auto;
+    &:hover {
+      background: var(--cl-primary-dark);
+    }
+  }
+}
+
+.TodoFilters {
+  width: 80%;
+  max-width: 400px;
+  margin: 2em auto;
+
+  ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    place-items: center;
+    button {
+      border: none;
+      color: var(--cl-secondary);
+      &.active {
+        color: var(--primary);
+        font-weight: var(--fw-bold);
+      }
+    }
+  }
+}
+
+.Todos {
+  width: 90%;
+  max-width: 600px;
+  margin: 2em auto;
+  .Todo {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0.5em;
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    grid-template-rows: repeat(2, 1fr);
+    span {
+      display: block;
+    }
+    &__date {
+      padding: 0.5em 0;
+      grid-column: 2 / 3;
+      grid-row: 2 / 3;
+      font-size: 0.7rem;
+      opacity: 0.6;
+    }
+  }
+}
