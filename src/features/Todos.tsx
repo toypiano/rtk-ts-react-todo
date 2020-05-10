@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Todo } from './todo.model';
+import { Todo } from '../models/todo.model';
 
 const todos: Todo[] = [
   {
